@@ -47,7 +47,7 @@ public class ProxyIpUtil {
 
                         for(ProxyIp proxyIp:proxyIpList){
 
-                            if(proxyIp.getSpeed()<= 1000){
+                            if(proxyIp.getSpeed()<= 800){
                                 proxyPool.add(new String[]{"","",proxyIp.getIp(),proxyIp.getPort().toString()});
                             }
                         }

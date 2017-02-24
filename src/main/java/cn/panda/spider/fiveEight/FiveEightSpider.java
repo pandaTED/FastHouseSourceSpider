@@ -26,6 +26,7 @@ public class FiveEightSpider implements PageProcessor{
             addHeader("Referer", "http://ta.58.com/ershoufang").
             setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.37 Safari/537.36");
 
+    private static List<String> wapHouseUrlList = new ArrayList<String>();
 
 
     public Site getSite() {
@@ -59,6 +60,15 @@ public class FiveEightSpider implements PageProcessor{
 
       fiveEightHouseLink.addAll(new HashSet<String>(fiveeightPage));
 
+      if(null != wapHouseUrlList && wapHouseUrlList.size() !=0){
+          page.addTargetRequests(wapHouseUrlList);
+      }
+
+      try {
+          wapHouseUrlList.remove(page.getUrl());
+      }catch (Exception e){
+          e.printStackTrace();
+      }
 
     }
 
@@ -66,29 +76,36 @@ public class FiveEightSpider implements PageProcessor{
     //主入口
     public static void main(String[] args) {
 
+        WapFiveEightSpider wapFiveEightSpider = new WapFiveEightSpider();
+
         Spider.create(new FiveEightSpider()).addUrl("http://ta.58.com/ershoufang/0/").thread(10).run();
+
+        String requestUrlTemp = "http://wap.58.com/ta/ershoufang/%s.shtml?device=wap";
 
         Set<String> urlStrSet = new HashSet<String>();
 
         for(String url:fiveEightHouseLink){
+
             String newUrlStr = url.replace("http://ta.58.com/ershoufang/","").replace(".shtml","");
             urlStrSet.add(newUrlStr);
         }
 
-        List<String> urlList = new ArrayList<String>(urlStrSet);
+        int i = 0;
 
-        System.out.println("oldSize--->"+urlList.size());
+        for(String str:urlStrSet){
+            wapFiveEightSpider.spiderRun(str);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        List<List<String>> newList = toGroupList(urlList,3000);
-
-        System.out.println("newSize--->"+newList.size());
-
-        for(List<String> strList:newList){
-            WapFiveEightThread wapFiveEightThread = new WapFiveEightThread(strList);
-            wapFiveEightThread.start();
+            System.out.println("i----->"+(i++));
         }
 
     }
+
+
 
     public static List<List<String>> toGroupList(List<String> list,Integer groupNum){
         List<List<String>> newList = new ArrayList<List<String>>();
@@ -108,11 +125,9 @@ public class FiveEightSpider implements PageProcessor{
                     }else{
                         newList.add(list.subList((i*size),list.size()));
                     }
-
                 }
             }
         }
-
         return newList;
     }
 

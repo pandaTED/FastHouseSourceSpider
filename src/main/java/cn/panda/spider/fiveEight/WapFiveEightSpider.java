@@ -1,9 +1,12 @@
 package cn.panda.spider.fiveEight;
 
+import cn.panda.util.ProxyIpUtil;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+
+import java.util.List;
 
 /**
  * Created by lingj on 2017/2/23 0023.
@@ -22,11 +25,19 @@ public class WapFiveEightSpider implements PageProcessor{
 
 
     public void process(Page page) {
-        System.out.println("--->"+Thread.currentThread().getName());
+
+        System.out.println(Thread.currentThread().getName());
         System.out.println(page.getUrl()+":status--->"+page.getStatusCode());
+        System.out.println(page.getHtml());
+
+
     }
 
     public Site getSite() {
+
+//        List<String[]> proxyPool = ProxyIpUtil.getAllProxyList();
+//        site.setHttpProxyPool(proxyPool,false);
+
         return site ;
     }
 

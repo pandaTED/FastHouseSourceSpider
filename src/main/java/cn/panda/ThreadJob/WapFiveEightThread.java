@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public class WapFiveEightThread implements Runnable{
 
-    private List<String> onlyIdList;
+    private  volatile List<String> onlyIdList;
 
     public WapFiveEightThread(List<String> onlyIdList) {
 
