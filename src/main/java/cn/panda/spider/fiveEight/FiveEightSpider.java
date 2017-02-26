@@ -74,7 +74,7 @@ public class FiveEightSpider implements PageProcessor{
 
 
     //主入口
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         WapFiveEightSpider wapFiveEightSpider = new WapFiveEightSpider();
 
@@ -94,10 +94,15 @@ public class FiveEightSpider implements PageProcessor{
 
         for(String str:urlStrSet){
             wapFiveEightSpider.spiderRun(str);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+
+            Thread.sleep(2000);
+
+
+            if(i != 0 && i%500 == 0 ){
+
+                Thread.sleep(1000*60*5);
+
             }
 
             System.out.println("i----->"+(i++));

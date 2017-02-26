@@ -8,30 +8,30 @@ import java.util.Date;
 public class House {
 
         Long id;
-        String hashstr; //hash值，通过
-        String onlyId;
-        String newOnlyId;
-        String title;
-        String villageName;
-        String price;
-        String mprice;
-        String housrType;
-        String area;
-        String floor;
-        String allFloor;
-        String propertyType;
-        String propertyYear;
-        String buildType;
-        String buildYear;
-        String cityArea;
-        String smallArea;
-        String address;
-        String phone;
-        String contact;
-        String description;
-        String publishTime;
-        String updateTime;
-        Date addTime;
+        String hashstr;     //hash值，通过
+        String onlyId;      //链接内地id
+        String newOnlyId;   //新的onlyId
+        String title;       //标题
+        String villageName; //小区名
+        String price;       //价格
+        String mprice;      //单价
+        String housrType;   //房屋类型
+        String area;        //面积
+        String floor;       //所在楼层
+        String allFloor;    //全部楼层
+        String propertyType;    //产权类型
+        String propertyYear;    //产权年限
+        String buildType;       //建筑类型
+        String buildYear;       //建筑年代
+        String cityArea;        //城市区域
+        String smallArea;       //所在小区域
+        String address;         //地址
+        String phone;           //手机号
+        String contact;         //联系人
+        String description;     //描述
+        String publishTime;     //发布时间
+        String updateTime;      //更新时间
+        Date addTime;           //添加时间
 
 
         //toString
